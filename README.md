@@ -1,6 +1,7 @@
 RestAPI
 ===
 > **Unity 개발 시 Rest API 호출하는 방법**   
+[EDT Rest API Test Server](http://106.247.250.251:31866/)
 
 ![Untitled](https://user-images.githubusercontent.com/73912947/201695219-d56667e2-0a6e-4d57-b480-5d74dca708d0.png)
 ## 🔎 RestAPI?
