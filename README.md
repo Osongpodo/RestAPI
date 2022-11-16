@@ -37,7 +37,37 @@ REpresentational State  Transfer 의 약자로, Http 프로토콜로 데이터�
 ## 🔐 UnityWebRequest 방식을 활용한 HTTP 통신
 > using UnityEngine.Networking 선언 필수 !
 
-![Untitled (18)](https://user-images.githubusercontent.com/73912947/202092541-2d53db6c-99b5-4ba9-8bce-d6d4bd52e1fe.png)
-![Untitled (19)](https://user-images.githubusercontent.com/73912947/202092582-44faad1c-3cee-40b8-ba8b-98a361259d78.png)
+``` c#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class NetworkTest : MonoBehaviour
+{
+    void Start()
+    {
+        StartCoroutine(UnityWebRequestGETTest());
+    }
+
+    IEnumerator UnityWebRequestGETTest()
+    {
+        string url = "http://106.247.250.251:31866/read_ints";
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+
+        yield return www.SendWebRequest();
+
+        if(www.error == null)
+        {
+            Debug.Log(www.downloadHandler.text);
+        }
+        else
+        {
+            Debug.Log("error");
+        }
+    }
+}
+```
 
 GET 방식을 이용하여 해당 서버의 Int_Table을 출력하였다.
