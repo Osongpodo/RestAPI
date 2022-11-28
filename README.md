@@ -70,4 +70,95 @@ public class NetworkTest : MonoBehaviour
 }
 ```
 
-GET 방식을 이용하여 해당 서버의 Int_Table을 출력하였다.
+GET 방식을 이용하여 해당 서버의 Int_Table을 출력하였다.   
+## 📋 Json Parsing
+> Callback 함수를 이용하여 두 스크립트 간 코드를 작성하였고 (새롭게 알게 된 사실!ㅎㅎ)   
+> Server의 Json 문법으로 적힌 string을 객체로 바꿔 읽어온다.   
+> Value vv = JsonUtility.FromJson<Value>(str);
+```c#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class JsonTest : MonoBehaviour
+{
+    public delegate void callback(string str);
+
+    public void LoadData(callback func)
+    {
+        StartCoroutine(UnityWebRequestGETTest(func));
+    }
+
+    IEnumerator UnityWebRequestGETTest(callback func)
+    {
+        string url = "http://106.247.250.251:31866/read_ints";
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+
+        yield return www.SendWebRequest();
+
+        if (www.error == null)
+        {
+            func(www.downloadHandler.text);
+        }
+        else
+        {
+            Debug.Log("error");
+        }
+    }
+}
+```
+```c#
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TestCode : MonoBehaviour
+{
+    public JsonTest test;
+
+    void Start()
+    {
+        test.LoadData(printLog);
+
+    }
+
+    public void printLog(string str)
+    {
+        Value vv = JsonUtility.FromJson<Value>(str);
+
+        foreach(Data data in vv.int_table)
+        {
+            data.printData();
+            Debug.Log("====================================");
+        }
+    }
+}
+
+[Serializable]
+public class Data
+{
+    public int id;
+    public string logging_time;
+    public int int_value;
+
+    public void printData()
+    {
+        Debug.Log("id : " + id);
+        Debug.Log("logging_time : " + logging_time);
+        Debug.Log("int_value : " + int_value);
+    }
+}
+
+[Serializable]
+public class Value
+{
+    public Data[] int_table;
+}
+
+```
+## 🍇 결과
+> Canvas UI도 제작하고, Network도 연결하고, 데이터도 받아왔다!
+> 이제 Index에 데이터가 이쁘게 나오도록 한다!
