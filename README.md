@@ -74,7 +74,8 @@ GET 방식을 이용하여 해당 서버의 Int_Table을 출력하였다.
 ## 📋 Json Parsing
 > Callback 함수를 이용하여 두 스크립트 간 코드를 작성하였고 (새롭게 알게 된 사실!ㅎㅎ)   
 > Server의 Json 문법으로 적힌 string을 객체로 바꿔 읽어온다.   
-> Value vv = JsonUtility.FromJson<Value>(str);
+> Value vv = JsonUtility.FromJson<Value>(str);   
+📌 **Json 직렬화는 구조화된 Json 개념을 사용한다. 즉 Json 데이터에 저장하려는 변수를 설명하는 클래스 또는 구조를 만들어야한다.**
 ```c#
 using System.Collections;
 using System.Collections.Generic;
@@ -137,6 +138,7 @@ public class TestCode : MonoBehaviour
     }
 }
 
+// 
 [Serializable]
 public class Data
 {
