@@ -167,3 +167,7 @@ public class Value
 
 ![image](https://user-images.githubusercontent.com/73912947/206358662-7b531317-3785-410d-9360-4a7cbfc15865.png)
 
+## 📊 Making Graph
+> Table에 맞는 Data의 값에 맞게  Graph를 그리도록 한다. (우선은 id까지 출력! value에 맞게 그래프 제작하기)   
+    
+![image](https://user-images.githubusercontent.com/73912947/206383912-294321c6-e2fe-403f-838e-b77e1f85f6ae.png)
